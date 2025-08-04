@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateSpooler.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

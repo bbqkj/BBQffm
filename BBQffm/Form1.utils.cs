@@ -124,10 +124,12 @@ namespace ffm
             {
                 textBox9.Text = textBox9.Text + generateLog(strArg);
             }
-            //Console.WriteLine(strArg);
+            Console.WriteLine(strArg);
+            
             Process p = new Process();//建立外部调用线程
             string ffmpegPath = System.AppDomain.CurrentDomain.BaseDirectory
                + "\\ffmpeg.exe";
+            Console.WriteLine(ffmpegPath);
             p.StartInfo.FileName = ffmpegPath;//要调用外部程序的绝对路径
             p.StartInfo.Arguments = strArg;
             p.StartInfo.UseShellExecute = false;//不使用操作系统外壳程序启动线程(一定为FALSE,详细的请看MSDN)
@@ -259,6 +261,44 @@ namespace ffm
                 }
             }
             return str;
+        }
+
+        public static string ConvertToTotalSeconds(string timeString)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(timeString))
+                    return null;
+
+                // 支持多种分隔符（:/.）
+                char[] separators = { ':', '.' };
+                var parts = timeString.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                // 验证格式（至少需要时:分:秒）
+                if (parts.Length < 3 || parts.Length > 4)
+                    return null;
+
+                // 使用TryParse更安全
+                if (!int.TryParse(parts[0], out int hours) ||
+                    !int.TryParse(parts[1], out int minutes) ||
+                    !int.TryParse(parts[2], out int seconds))
+                    return null;
+
+                // 处理毫秒部分
+                int milliseconds = 0;
+                if (parts.Length == 4 && !int.TryParse(parts[3], out milliseconds))
+                    return null;
+
+                // 验证数值范围
+                if (minutes >= 60 || seconds >= 60 || milliseconds >= 1000)
+                    return null;
+
+                return (hours * 3600 + minutes * 60 + seconds + milliseconds / 1000.0) + "";
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

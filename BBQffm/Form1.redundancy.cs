@@ -116,6 +116,12 @@ namespace ffm
             progressBar1.Value = 0;
             label8.Text = "0%";
             textBox6.Text = "0,0";
+
+            numericUpDown2.Value = -1;
+
+            listBox3.Items.Clear();
+            this.listBox3.Visible = false;
+            this.button19.Visible = false;
         }
 
         public void AssignmentProcessFile(String path1, String path2, ProcessFileDto processFile)
@@ -215,7 +221,10 @@ namespace ffm
 
         public void ShowFileSize(String path)
         {
-            label6.Text = "大小：" + GetFileSize(new FileInfo(path).Length);
+            if (File.Exists(path))
+            {
+                label6.Text = "大小：" + GetFileSize(new FileInfo(path).Length);
+            }
         }
 
         public bool ExistsFile()
@@ -223,6 +232,7 @@ namespace ffm
             if (File.Exists(textBox2.Text))
             {
                 MessageBox.Show("目标路径存在文件", "警告", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                numericUpDown2.Value++;
                 return true;
             }
             return false;

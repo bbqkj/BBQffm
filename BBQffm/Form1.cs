@@ -11,6 +11,9 @@ namespace ffm
     {
         string total;
         double millisecondTotal;
+        bool _isUpdating = false; // 状态标志
+
+        TimeSpan timeDifference2;
 
         // 帧坐标 即视频宽高
         int widthFrame = 0;
@@ -31,12 +34,16 @@ namespace ffm
         int i = 0;
 
         public static String state; 
-        public static Boolean flag; 
+        public static Boolean flag;
+
+        public static String duration;
 
         private bool dragging = false;
         private int dragIndex = -1;
         private Point dragCursorPoint;
         private Point dragStartPoint;
+
+        DelegateSpooler spooler = new DelegateSpooler("TaskQueue");
 
         public Form1()
         {
@@ -48,6 +55,9 @@ namespace ffm
             IniProgressBar();
 
             IniCache();
+
+            
+            spooler.InitQueue(1); // 初始化5个管道
 
             textBox9.Text = GetLog();
 
@@ -103,35 +113,89 @@ namespace ffm
 
         private void Value1Change()
         {
+            if (_isUpdating) return;
+            _isUpdating = true;
             DateTime dateTime = new DateTime(1900, 1, 1, 0, 0, 0)
                 .AddMilliseconds(trackBar21.Value1);
             String time = dateTime.ToString("HH:mm:ss.fff");
             textBox3.Text = time;
             dateTimePicker1.Value = dateTime;
-            GetPic(time);
+
+            GetPicAsync(time);
+            _isUpdating = false;
         }
 
         private void Value2Change()
         {
+            if (_isUpdating) return;
+            _isUpdating = true;
             DateTime dateTime = new DateTime(1900, 1, 1, 0, 0, 0)
                 .AddMilliseconds(trackBar21.Value2);
             String time = dateTime.ToString("HH:mm:ss.fff");
             textBox4.Text = time;
             dateTimePicker2.Value = dateTime;
 
-            GetPic(time);
+            GetPicAsync(time);
+            //GetPic(time);
+            _isUpdating = false;
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            textBox3.Text = dateTimePicker1.Value.ToString("HH:mm:ss.fff");
-            //trackBar21.Value1 = dateTimePicker1.Value.Millisecond;
+            if (_isUpdating) return;
+            _isUpdating = true;
+            string dateTimeStr = dateTimePicker1.Value.ToString("HH:mm:ss.fff");
+
+            textBox3.Text = dateTimeStr;
+            trackBar21.Value1 = TimeSpan.Parse(dateTimeStr).TotalMilliseconds;
+
+            GetPicAsync(dateTimeStr);
+            _isUpdating = false;
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            textBox4.Text = dateTimePicker2.Value.ToString("HH:mm:ss.fff");
-            //trackBar21.Value2 = dateTimePicker2.Value.Millisecond;
+            if (_isUpdating) return;
+            _isUpdating = true;
+            string dateTimeStr = dateTimePicker2.Value.ToString("HH:mm:ss.fff");
+
+            textBox4.Text = dateTimeStr;
+            trackBar21.Value2 = TimeSpan.Parse(dateTimeStr).TotalMilliseconds;
+
+            GetPicAsync(dateTimeStr);
+            _isUpdating = false;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (_isUpdating) return;
+            _isUpdating = true;
+            String time = textBox3.Text;
+            double timed = TimeSpan.Parse(time).TotalMilliseconds;
+
+            DateTime dateTime = new DateTime(1900, 1, 1, 0, 0, 0)
+                .AddMilliseconds(timed);
+            dateTimePicker1.Value = dateTime;
+            trackBar21.Value1 = timed;
+
+            GetPicAsync(time);
+            _isUpdating = false;
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            if (_isUpdating) return;
+            _isUpdating = true;
+            String time = textBox4.Text;
+            double timed = TimeSpan.Parse(time).TotalMilliseconds;
+
+            DateTime dateTime = new DateTime(1900, 1, 1, 0, 0, 0)
+                .AddMilliseconds(timed);
+            dateTimePicker2.Value = dateTime;
+            trackBar21.Value2 = timed;
+
+            GetPicAsync(time);
+            _isUpdating = false;
         }
 
         private void tabPage1_DragDrop(object sender, DragEventArgs e)
@@ -154,9 +218,9 @@ namespace ffm
         private void tabPage2_DragEnter(object sender, DragEventArgs e)
         {
             object data = e.Data.GetData(typeof(string));
-            if (data != null)
+            if (this.listBox1.SelectedItem == data)
             {
-                listBox1.Items.Remove(data);
+                listBox1.Items.Remove(this.listBox1.SelectedItem);
             }
         }
 
@@ -181,7 +245,7 @@ namespace ffm
             {
                 System.Array files = (System.Array)e.Data.GetData(DataFormats.FileDrop);
                 string path = files.GetValue(0).ToString();       //获得路径                
-                if (listBox1.Items.Count == 0)
+                if (listBox1.Items.Count == 0 && !path.Contains(".mp3"))
                 {
                     String path2 = coverPath(path, "_");
                     textBox5.Text = path2;
@@ -190,6 +254,11 @@ namespace ffm
                 for (int k = 1; k < files.Length; k++)
                 {
                     listBox1.Items.Add(files.GetValue(k).ToString());
+                    if(textBox5.Text.Equals(""))
+                    {
+                        String path2 = coverPath(files.GetValue(k).ToString(), "_");
+                        textBox5.Text = path2;
+                    }
                 }
                 ShowFileSize(path);
             }
@@ -237,6 +306,17 @@ namespace ffm
         {
             state = "合并视频";
             MergeVideo();
+        }
+        private void button16_Click(object sender, EventArgs e)
+        {
+            state = "合并音视频";
+            MergeAudioVideo();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            state = "合并音视频2";
+            MergeAudioVideo2();
         }
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
@@ -461,6 +541,97 @@ namespace ffm
                 SetSettings("TEXTBOX11", value);
             }
             Configuration.PIC_PATH = value;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if(!"".Equals(textBox3.Text))
+            {
+                if (!this.listBox3.Visible)
+                {
+                    this.Size = new Size(this.Size.Width + 100, this.Size.Height);
+                    this.listBox3.Visible = true;
+                    this.button19.Visible = true;
+                }
+                this.listBox3.Items.Add(textBox3.Text);
+            }
+        }
+
+        private void listBox3_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (this.listBox3.SelectedItem == null)
+            {
+                return;
+            }
+            String time = this.listBox3.SelectedItem.ToString();
+
+            GetPicAsync(time);
+        }
+
+        private void listBox3_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (this.listBox3.SelectedItem == null)
+            {
+                return;
+            }
+            if(e.Button == MouseButtons.Left)
+            {
+                String time = this.listBox3.SelectedItem.ToString();
+                GetPicAsync(time);
+                //开始拖放操作，DragDropEffects为枚举类型。
+                //DragDropEffects.Move 为将源数据移动到目标数据
+                Console.WriteLine(this.listBox3.DoDragDrop(this.listBox3.SelectedItem, DragDropEffects.Move));
+
+            }
+            
+        }
+
+        private void listBox3_DragDrop(object sender, DragEventArgs e)
+        {
+            return;
+            //获取拖放的数据内容
+            object data = e.Data.GetData(typeof(string));
+            if (data != null)
+            {
+                Point point = listBox1.PointToClient(new Point(e.X, e.Y));
+                int index = this.listBox3.IndexFromPoint(point);
+                if (index < 0)
+                {
+                    index = this.listBox3.Items.Count - 1;
+                }
+                //删除元数据
+                this.listBox3.Items.Remove(data);
+                //插入目标数据
+                this.listBox3.Items.Insert(index, data);
+            }
+        }
+
+        private void listBox3_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            state = "切片并合并";
+            MergeSliceVideo();
+        }
+
+        private void listBox3_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (this.listBox3.SelectedItem != null)
+            {
+                listBox3.Items.Remove(this.listBox3.SelectedItem);
+            }
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            object data = e.Data.GetData(typeof(string));
+            if (this.listBox3.SelectedItem == data)
+            {
+                listBox3.Items.Remove(this.listBox3.SelectedItem);
+            }
         }
     }
 }

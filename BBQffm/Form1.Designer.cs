@@ -56,6 +56,7 @@ namespace ffm
             this.label8 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button18 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -68,6 +69,8 @@ namespace ffm
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -75,26 +78,28 @@ namespace ffm
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.button19 = new System.Windows.Forms.Button();
             this.pictureBox12 = new ffm.NewPictureBox();
             this.processFileDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.trackBar21 = new ffm.TrackBar2();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -103,11 +108,11 @@ namespace ffm
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -211,9 +216,9 @@ namespace ffm
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(279, 225);
+            this.button8.Location = new System.Drawing.Point(246, 225);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(64, 23);
+            this.button8.Size = new System.Drawing.Size(46, 23);
             this.button8.TabIndex = 26;
             this.button8.Text = "截图";
             this.button8.UseVisualStyleBackColor = true;
@@ -248,6 +253,7 @@ namespace ffm
             this.dateTimePicker1.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dateTimePicker1.Location = new System.Drawing.Point(3, 15);
             this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
             this.dateTimePicker1.Size = new System.Drawing.Size(68, 21);
             this.dateTimePicker1.TabIndex = 9;
             this.dateTimePicker1.Value = new System.DateTime(2024, 12, 2, 0, 0, 0, 0);
@@ -258,6 +264,7 @@ namespace ffm
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePicker2.Location = new System.Drawing.Point(168, 15);
             this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
             this.dateTimePicker2.Size = new System.Drawing.Size(68, 21);
             this.dateTimePicker2.TabIndex = 10;
             this.dateTimePicker2.Value = new System.DateTime(2024, 12, 2, 0, 10, 0, 0);
@@ -294,6 +301,7 @@ namespace ffm
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(80, 21);
             this.textBox4.TabIndex = 21;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox3
             // 
@@ -301,12 +309,13 @@ namespace ffm
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(80, 21);
             this.textBox3.TabIndex = 20;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(5, 225);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 23);
+            this.button1.Size = new System.Drawing.Size(55, 23);
             this.button1.TabIndex = 12;
             this.button1.Text = "剪辑";
             this.button1.UseVisualStyleBackColor = true;
@@ -359,6 +368,7 @@ namespace ffm
             // 
             // tabControl1
             // 
+            this.tabControl1.AllowDrop = true;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -373,6 +383,7 @@ namespace ffm
             // tabPage1
             // 
             this.tabPage1.AllowDrop = true;
+            this.tabPage1.Controls.Add(this.button18);
             this.tabPage1.Controls.Add(this.button8);
             this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.button6);
@@ -394,9 +405,19 @@ namespace ffm
             this.tabPage1.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabPage1_DragDrop);
             this.tabPage1.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabPage1_DragEnter);
             // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(293, 225);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(51, 23);
+            this.button18.TabIndex = 27;
+            this.button18.Text = "截点";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(209, 225);
+            this.button7.Location = new System.Drawing.Point(179, 225);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(64, 23);
             this.button7.TabIndex = 25;
@@ -406,9 +427,9 @@ namespace ffm
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(141, 225);
+            this.button6.Location = new System.Drawing.Point(115, 225);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(64, 23);
+            this.button6.Size = new System.Drawing.Size(65, 23);
             this.button6.TabIndex = 24;
             this.button6.Text = "设置封面";
             this.button6.UseVisualStyleBackColor = true;
@@ -416,11 +437,11 @@ namespace ffm
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(73, 225);
+            this.button5.Location = new System.Drawing.Point(61, 225);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(64, 23);
+            this.button5.Size = new System.Drawing.Size(52, 23);
             this.button5.TabIndex = 23;
-            this.button5.Text = "加马赛克";
+            this.button5.Text = "马赛克";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -505,6 +526,8 @@ namespace ffm
             // 
             this.tabPage2.AllowDrop = true;
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tabPage2.Controls.Add(this.button17);
+            this.tabPage2.Controls.Add(this.button16);
             this.tabPage2.Controls.Add(this.button10);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.listBox2);
@@ -520,9 +543,29 @@ namespace ffm
             this.tabPage2.Text = "批量处理";
             this.tabPage2.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabPage2_DragEnter);
             // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(253, 228);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(75, 23);
+            this.button17.TabIndex = 28;
+            this.button17.Text = "合并音视2";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(128, 228);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(75, 23);
+            this.button16.TabIndex = 27;
+            this.button16.Text = "合并音视";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(21, 225);
+            this.button10.Location = new System.Drawing.Point(8, 206);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 23);
             this.button10.TabIndex = 26;
@@ -533,7 +576,7 @@ namespace ffm
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 152);
+            this.label13.Location = new System.Drawing.Point(5, 148);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 12);
             this.label13.TabIndex = 25;
@@ -544,14 +587,14 @@ namespace ffm
             this.listBox2.AllowDrop = true;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(6, 167);
+            this.listBox2.Location = new System.Drawing.Point(6, 162);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(338, 52);
+            this.listBox2.Size = new System.Drawing.Size(338, 40);
             this.listBox2.TabIndex = 22;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(242, 225);
+            this.button9.Location = new System.Drawing.Point(253, 206);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(75, 23);
             this.button9.TabIndex = 21;
@@ -568,7 +611,7 @@ namespace ffm
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(131, 225);
+            this.button4.Location = new System.Drawing.Point(8, 229);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 15;
@@ -589,8 +632,123 @@ namespace ffm
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox1_DragDrop);
             this.listBox1.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox1_DragOver);
             this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
-            this.listBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseUp);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage3.Controls.Add(this.button13);
+            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Controls.Add(this.button12);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(350, 254);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "自定义命令";
+            // 
+            // button13
+            // 
+            this.button13.Enabled = false;
+            this.button13.Location = new System.Drawing.Point(304, 17);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(40, 20);
+            this.button13.TabIndex = 30;
+            this.button13.Text = "缓存";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(9, 17);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(289, 20);
+            this.comboBox2.TabIndex = 29;
+            this.comboBox2.TextChanged += new System.EventHandler(this.comboBox2_TextChanged);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(113, 213);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 28;
+            this.button12.Text = "执行";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage4.Controls.Add(this.textBox11);
+            this.tabPage4.Controls.Add(this.label15);
+            this.tabPage4.Controls.Add(this.label14);
+            this.tabPage4.Controls.Add(this.textBox10);
+            this.tabPage4.Controls.Add(this.checkBox3);
+            this.tabPage4.Controls.Add(this.checkBox2);
+            this.tabPage4.Controls.Add(this.checkBox1);
+            this.tabPage4.Controls.Add(this.button11);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(350, 254);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "配置管理";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(131, 141);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(191, 21);
+            this.textBox11.TabIndex = 31;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(24, 144);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(101, 12);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "图片缓存路径前缀";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(24, 99);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "日志路径";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(131, 96);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(191, 21);
+            this.textBox10.TabIndex = 20;
+            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(19, 62);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(132, 16);
+            this.checkBox3.TabIndex = 29;
+            this.checkBox3.Text = "删除原视频进回收站";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(19, 40);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(84, 16);
+            this.checkBox2.TabIndex = 28;
+            this.checkBox2.Text = "日志持久化";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -602,6 +760,92 @@ namespace ffm
             this.checkBox1.Text = "图框适应";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(115, 211);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(97, 23);
+            this.button11.TabIndex = 27;
+            this.button11.Text = "清空配置缓存";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button15);
+            this.tabPage5.Controls.Add(this.button14);
+            this.tabPage5.Controls.Add(this.textBox9);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(350, 254);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "执行日志";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(185, 228);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(90, 23);
+            this.button15.TabIndex = 31;
+            this.button15.Text = "删除日志文件";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(33, 228);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(90, 23);
+            this.button14.TabIndex = 30;
+            this.button14.Text = "清空显示面板";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // textBox9
+            // 
+            this.textBox9.AcceptsReturn = true;
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.textBox9.Location = new System.Drawing.Point(8, 18);
+            this.textBox9.Multiline = true;
+            this.textBox9.Name = "textBox9";
+            this.textBox9.ReadOnly = true;
+            this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox9.Size = new System.Drawing.Size(335, 209);
+            this.textBox9.TabIndex = 20;
+            this.textBox9.WordWrap = false;
+            // 
+            // listBox3
+            // 
+            this.listBox3.AllowDrop = true;
+            this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 12;
+            this.listBox3.Location = new System.Drawing.Point(461, 25);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.listBox3.Size = new System.Drawing.Size(79, 268);
+            this.listBox3.TabIndex = 22;
+            this.listBox3.Visible = false;
+            this.listBox3.SelectedValueChanged += new System.EventHandler(this.listBox3_SelectedValueChanged);
+            this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox3_DragDrop);
+            this.listBox3.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox3_DragOver);
+            this.listBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox3_MouseDown);
+            this.listBox3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBox3_MouseUp);
+            // 
+            // button19
+            // 
+            this.button19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button19.Location = new System.Drawing.Point(461, 298);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(79, 23);
+            this.button19.TabIndex = 28;
+            this.button19.Text = "切片并合并";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Visible = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // pictureBox12
             // 
@@ -648,184 +892,14 @@ namespace ffm
             this.trackBar21.Value1Changed += new System.EventHandler(this.trackBar21_Value1Changed);
             this.trackBar21.Value2Changed += new System.EventHandler(this.trackBar21_Value2Changed);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabPage3.Controls.Add(this.button13);
-            this.tabPage3.Controls.Add(this.comboBox2);
-            this.tabPage3.Controls.Add(this.button12);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(350, 254);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "自定义命令";
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabPage4.Controls.Add(this.textBox11);
-            this.tabPage4.Controls.Add(this.label15);
-            this.tabPage4.Controls.Add(this.label14);
-            this.tabPage4.Controls.Add(this.textBox10);
-            this.tabPage4.Controls.Add(this.checkBox3);
-            this.tabPage4.Controls.Add(this.checkBox2);
-            this.tabPage4.Controls.Add(this.checkBox1);
-            this.tabPage4.Controls.Add(this.button11);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(350, 254);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "配置管理";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(115, 211);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(97, 23);
-            this.button11.TabIndex = 27;
-            this.button11.Text = "清空配置缓存";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(113, 213);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 28;
-            this.button12.Text = "执行";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(9, 17);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(289, 20);
-            this.comboBox2.TabIndex = 29;
-            this.comboBox2.TextChanged += new System.EventHandler(this.comboBox2_TextChanged);
-            // 
-            // button13
-            // 
-            this.button13.Enabled = false;
-            this.button13.Location = new System.Drawing.Point(304, 17);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(40, 20);
-            this.button13.TabIndex = 30;
-            this.button13.Text = "缓存";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // textBox9
-            // 
-            this.textBox9.AcceptsReturn = true;
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox9.Location = new System.Drawing.Point(8, 18);
-            this.textBox9.Multiline = true;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ReadOnly = true;
-            this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox9.Size = new System.Drawing.Size(335, 209);
-            this.textBox9.TabIndex = 20;
-            this.textBox9.WordWrap = false;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.button15);
-            this.tabPage5.Controls.Add(this.button14);
-            this.tabPage5.Controls.Add(this.textBox9);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(350, 254);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "执行日志";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(19, 40);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(84, 16);
-            this.checkBox2.TabIndex = 28;
-            this.checkBox2.Text = "日志持久化";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(19, 62);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(132, 16);
-            this.checkBox3.TabIndex = 29;
-            this.checkBox3.Text = "删除原视频进回收站";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(33, 228);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(90, 23);
-            this.button14.TabIndex = 30;
-            this.button14.Text = "清空显示面板";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(185, 228);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(90, 23);
-            this.button15.TabIndex = 31;
-            this.button15.Text = "删除日志文件";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(131, 96);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(191, 21);
-            this.textBox10.TabIndex = 20;
-            this.textBox10.TextChanged += new System.EventHandler(this.textBox10_TextChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(24, 99);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "日志路径";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(24, 144);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(101, 12);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "图片缓存路径前缀";
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(131, 141);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(191, 21);
-            this.textBox11.TabIndex = 31;
-            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
-            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 330);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.listBox3);
             this.Controls.Add(this.pictureBox12);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label8);
@@ -836,6 +910,7 @@ namespace ffm
             this.Controls.Add(this.button3);
             this.Name = "Form1";
             this.Text = "视频压缩";
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -849,13 +924,13 @@ namespace ffm
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -927,6 +1002,11 @@ namespace ffm
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.Button button19;
     }
 }
 
