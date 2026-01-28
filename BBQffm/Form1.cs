@@ -4,6 +4,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections;
 using Newtonsoft.Json;
+using System.Diagnostics;
+using static System.Windows.Forms.ListBox;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ffm
 {
@@ -45,6 +49,10 @@ namespace ffm
 
         DelegateSpooler spooler = new DelegateSpooler("TaskQueue");
 
+        ExecuteProcessDto executeProcessDto = new ExecuteProcessDto();
+
+        private TaskScheduler _scheduler;
+
         public Form1()
         {
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
@@ -62,6 +70,8 @@ namespace ffm
             textBox9.Text = GetLog();
 
             pictureBox12.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
+
+            InitializeScheduler();
         }
 
         /*private void Form1_Load(object sender, EventArgs e)
@@ -69,10 +79,34 @@ namespace ffm
             pictureBox12.MouseWheel += new MouseEventHandler(pictureBox1_MouseWheel);
         }*/
 
-        private void button1_Click(object sender, EventArgs e)
+        private void InitializeScheduler()
         {
-            state = "剪辑";
-            EditVideo(textBox1.Text, textBox2.Text);
+            // 创建调度器，每5秒执行一次
+            _scheduler = new TaskScheduler(100);
+            // 设置任务
+            _scheduler.SetTask(ExecuteTask);
+            // 启动调度器
+            _scheduler.Start();
+        }
+        int count = 0;
+        private void ExecuteTask2()
+        {
+           
+
+            // 在这里写要执行的任务，比如更新界面上的时间
+             //label7.Text = DateTime.Now.ToString();
+             label7.Text = ""+ count++;
+
+             Thread.Sleep(10000);
+
+        }
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                state = "剪辑";
+                EditVideo(textBox1.Text, textBox2.Text);
+            });
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -98,7 +132,7 @@ namespace ffm
             {
                 addPath += numericUpDown2.Value;
             }
-            textBox2.Text = coverPath(textBox1.Text, addPath);
+            textBox2.Text = coverPath(textBox1.Text, addPath, true);
         }
 
         private void trackBar21_Value1Changed(object sender, EventArgs e)
@@ -202,7 +236,14 @@ namespace ffm
         {
             Reset();
             string path = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();       //获得路径
-            String path2 = coverPath(path, "_");
+            String path2 = coverPath(path, "_", true);
+            if (IsAppointFileByFileName(path, Configuration.IMAGE_EXTENSIONS))
+            {
+                groupBox1.Visible = false;
+            } else
+            {
+                groupBox1.Visible = true;
+            }
             textBox1.Text = path;
             textBox2.Text = path2;
 
@@ -247,7 +288,7 @@ namespace ffm
                 string path = files.GetValue(0).ToString();       //获得路径                
                 if (listBox1.Items.Count == 0 && !path.Contains(".mp3"))
                 {
-                    String path2 = coverPath(path, "_");
+                    String path2 = coverPath(path, "_", true);
                     textBox5.Text = path2;
                 }
                 listBox1.Items.Add(path);
@@ -256,7 +297,7 @@ namespace ffm
                     listBox1.Items.Add(files.GetValue(k).ToString());
                     if(textBox5.Text.Equals(""))
                     {
-                        String path2 = coverPath(files.GetValue(k).ToString(), "_");
+                        String path2 = coverPath(files.GetValue(k).ToString(), "_", true);
                         textBox5.Text = path2;
                     }
                 }
@@ -427,8 +468,59 @@ namespace ffm
             listBox2.Items.Clear();
             foreach (string inputVideoPath in listBox1.Items)
             {
-                EditVideo(inputVideoPath, coverPath(inputVideoPath, "_"), true);
+                EditVideo(inputVideoPath, coverPath(inputVideoPath, "_", true), true);
             }
+        }
+
+        private async void button20_Click(object sender, EventArgs e)
+        {
+            if("开始执行".Equals(button20.Text))
+            {
+                button20.Text = "暂停执行";
+            }
+            else
+            {
+                button20.Text = "开始执行";
+            }   
+        }
+
+        private void ExecuteTask()
+        {
+            // 由于定时器是在非UI线程触发，所以更新UI需要Invoke
+            //if (InvokeRequired)
+            //{
+            //    Invoke(new Action(ExecuteTask));
+            //    return;
+            //}
+
+            // 在这里写要执行的任务，比如更新界面上的时间
+            // label1.Text = DateTime.Now.ToString();
+
+            if ("暂停执行".Equals(button20.Text))
+            {
+                state = "批量执行";
+                //listBox2.Items.Clear();
+                ArrayList items = new ArrayList(listBox4.Items);
+                foreach (string listStrArg in items)
+                {
+                    if ("开始执行".Equals(button20.Text))
+                    {
+                        break;
+                    }
+                    ExecuteProcessDto executeProcessDto = JsonConvert.DeserializeObject<ExecuteProcessDto>(listStrArg);
+                    state = "批量执行 " + executeProcessDto.state;
+                    progressBar1.Value = 0;
+                    label8.Text = "0%";
+                    ExecuteProcess(executeProcessDto.strArg, new DataReceivedEventHandler(OutputConvertVideo));
+                    progressBar1.Value = 100;
+                    label8.Text = "100%";
+                    listBox4.Items.Remove(listStrArg);
+                    listBox5.Items.Add(listStrArg);
+                    DeleteFileRecycleWithSetting(executeProcessDto.path, true);
+                }
+            }
+
+            
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -436,6 +528,11 @@ namespace ffm
             textBox5.Clear();
             listBox1.Items.Clear();
             listBox2.Items.Clear();
+        }
+        private void button21_Click(object sender, EventArgs e)
+        {
+            listBox4.Items.Clear();
+            listBox5.Items.Clear();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -505,6 +602,24 @@ namespace ffm
             SetSettings("CHECKBOX3", checkBox3.Checked);
         }
 
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX4", checkBox4.Checked);
+        }
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX5", checkBox5.Checked);
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX6", checkBox6.Checked);
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX7", checkBox7.Checked);
+        }
         private void button14_Click(object sender, EventArgs e)
         {
             textBox9.Text = "";
@@ -611,10 +726,13 @@ namespace ffm
             e.Effect = DragDropEffects.Move;
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private async void button19_Click(object sender, EventArgs e)
         {
             state = "切片并合并";
-            MergeSliceVideo();
+            await Task.Run(() =>
+            {
+                MergeSliceVideo();
+            });
         }
 
         private void listBox3_MouseUp(object sender, MouseEventArgs e)
@@ -633,5 +751,85 @@ namespace ffm
                 listBox3.Items.Remove(this.listBox3.SelectedItem);
             }
         }
+
+        private void listBox3_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+            // 1. 绘制背景
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                // 选中状态的背景
+                e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+            }
+            else
+            {
+                // 正常状态的背景
+                e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
+            }
+
+            // 2. 确保索引有效
+            if (e.Index < 0 || e.Index >= listBox3.Items.Count) return;
+
+            // 3. 获取文本
+            string text = listBox3.Items[e.Index]?.ToString() ?? "";
+
+            // 4. 设置文本颜色
+            Brush textBrush = ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                ? SystemBrushes.HighlightText
+                : SystemBrushes.WindowText;
+
+            // 5. 绘制文本
+            Rectangle textBounds = e.Bounds;
+            textBounds.Inflate(-2, 0); // 左右留一些边距
+
+            e.Graphics.DrawString(text, e.Font, textBrush, textBounds, StringFormat.GenericDefault);
+
+            // 6. 绘制分隔线：在每两行之后绘制（索引为1, 3, 5...之后）
+            if (e.Index < listBox3.Items.Count - 1 && e.Index % 2 == 1)
+            {
+                using (Pen pen = new Pen(Color.LightGray, 2))
+                {
+                    int lineX = e.Bounds.Left + 5;
+                    int lineY = e.Bounds.Bottom - 1;
+                    int lineWidth = e.Bounds.Width - 10;
+                    e.Graphics.DrawLine(pen, lineX, lineY, lineX + lineWidth, lineY);
+                }
+            }
+
+            // 7. 绘制焦点框
+            if ((e.State & DrawItemState.Focus) == DrawItemState.Focus)
+            {
+                e.DrawFocusRectangle();
+            }
+        }
+
+        private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBox4.SelectedIndices.Count > 0)
+            {
+                this.toolTip1.Active = true;
+
+                this.toolTip1.SetToolTip(this.listBox4, this.listBox4.Items[this.listBox4.SelectedIndex].ToString());
+            }
+            else
+            {
+                this.toolTip1.Active = false;
+            }
+        }
+
+        private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBox5.SelectedIndices.Count > 0)
+            {
+                this.toolTip1.Active = true;
+
+                this.toolTip1.SetToolTip(this.listBox5, this.listBox5.Items[this.listBox5.SelectedIndex].ToString());
+            }
+            else
+            {
+                this.toolTip1.Active = false;
+            }
+        }
+
     }
 }

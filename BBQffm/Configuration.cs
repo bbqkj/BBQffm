@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 
 namespace ffm
 {
@@ -11,5 +12,10 @@ namespace ffm
         // 图片缓存路径前缀
         public static String PIC_PATH_DEFAULT = "screenffm";
         public static String PIC_PATH = PIC_PATH_DEFAULT;
+
+        public static String CUSTOM_EXTENSIONS = "webp、";
+        public static String IMAGE_EXTENSIONS = "bmp、jpg、jpeg、png、webp、";
+        public static String VIDEO_EXTENSIONS = "mp4、3gp、avi、flv、mov、rmvb、wmv、mpg、mpeg、rm、ram、swf、gif、";
     }
+   
 }

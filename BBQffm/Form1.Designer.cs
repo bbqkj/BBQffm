@@ -42,10 +42,12 @@ namespace ffm
             this.button8 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.processFileDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.trackBar21 = new ffm.TrackBar2();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -78,11 +80,17 @@ namespace ffm
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button13 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button12 = new System.Windows.Forms.Button();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.listBox5 = new System.Windows.Forms.ListBox();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button20 = new System.Windows.Forms.Button();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.listBox4 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -95,24 +103,28 @@ namespace ffm
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.textBox9 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.button19 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox12 = new ffm.NewPictureBox();
-            this.processFileDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.trackBar21 = new ffm.TrackBar2();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -247,6 +259,10 @@ namespace ffm
             this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // processFileDtoBindingSource
+            // 
+            this.processFileDtoBindingSource.DataSource = typeof(ffm.ProcessFileDto);
+            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
@@ -294,6 +310,34 @@ namespace ffm
             this.label9.Size = new System.Drawing.Size(11, 12);
             this.label9.TabIndex = 15;
             this.label9.Text = "~";
+            // 
+            // trackBar21
+            // 
+            this.trackBar21.AutoSize = false;
+            this.trackBar21.LabelPlaces = ((uint)(0u));
+            this.trackBar21.Location = new System.Drawing.Point(4, 42);
+            this.trackBar21.Maximum = 100D;
+            this.trackBar21.Minimum = 0D;
+            this.trackBar21.MinimumSize = new System.Drawing.Size(100, 0);
+            this.trackBar21.Name = "trackBar21";
+            this.trackBar21.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.trackBar21.SelectTrackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.trackBar21.Size = new System.Drawing.Size(328, 35);
+            this.trackBar21.TabIndex = 20;
+            this.trackBar21.Text = "trackBar21";
+            this.trackBar21.TickColor = System.Drawing.Color.Black;
+            this.trackBar21.TickCount = 5;
+            this.trackBar21.TickLabelVisible = true;
+            this.trackBar21.TrackButtonClickColor = System.Drawing.Color.Blue;
+            this.trackBar21.TrackButtonColor1 = System.Drawing.Color.DarkGray;
+            this.trackBar21.TrackButtonColor2 = System.Drawing.Color.DarkGray;
+            this.trackBar21.TrackButtonSize = new System.Drawing.Size(18, 12);
+            this.trackBar21.TrackColor = System.Drawing.Color.Black;
+            this.trackBar21.TrackSelctedMode = ffm.TrackBar2.emTrackBarSelectedMode.Inner;
+            this.trackBar21.Value1 = 0D;
+            this.trackBar21.Value2 = 100D;
+            this.trackBar21.Value1Changed += new System.EventHandler(this.trackBar21_Value1Changed);
+            this.trackBar21.Value2Changed += new System.EventHandler(this.trackBar21_Value2Changed);
             // 
             // textBox4
             // 
@@ -371,9 +415,10 @@ namespace ffm
             this.tabControl1.AllowDrop = true;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -633,52 +678,90 @@ namespace ffm
             this.listBox1.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox1_DragOver);
             this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
             // 
-            // tabPage3
+            // tabPage6
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
-            this.tabPage3.Controls.Add(this.button13);
-            this.tabPage3.Controls.Add(this.comboBox2);
-            this.tabPage3.Controls.Add(this.button12);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(350, 254);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "自定义命令";
+            this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.tabPage6.Controls.Add(this.label16);
+            this.tabPage6.Controls.Add(this.listBox5);
+            this.tabPage6.Controls.Add(this.button21);
+            this.tabPage6.Controls.Add(this.button20);
+            this.tabPage6.Controls.Add(this.checkBox4);
+            this.tabPage6.Controls.Add(this.listBox4);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(350, 254);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "批量处理2";
             // 
-            // button13
+            // label16
             // 
-            this.button13.Enabled = false;
-            this.button13.Location = new System.Drawing.Point(304, 17);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(40, 20);
-            this.button13.TabIndex = 30;
-            this.button13.Text = "缓存";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(5, 147);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 12);
+            this.label16.TabIndex = 31;
+            this.label16.Text = "完成列表";
             // 
-            // comboBox2
+            // listBox5
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(9, 17);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(289, 20);
-            this.comboBox2.TabIndex = 29;
-            this.comboBox2.TextChanged += new System.EventHandler(this.comboBox2_TextChanged);
+            this.listBox5.AllowDrop = true;
+            this.listBox5.FormattingEnabled = true;
+            this.listBox5.ItemHeight = 12;
+            this.listBox5.Location = new System.Drawing.Point(5, 162);
+            this.listBox5.Name = "listBox5";
+            this.listBox5.Size = new System.Drawing.Size(338, 64);
+            this.listBox5.TabIndex = 30;
+            this.listBox5.SelectedIndexChanged += new System.EventHandler(this.listBox5_SelectedIndexChanged);
             // 
-            // button12
+            // button21
             // 
-            this.button12.Location = new System.Drawing.Point(113, 213);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 28;
-            this.button12.Text = "执行";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.button21.Location = new System.Drawing.Point(159, 229);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(75, 23);
+            this.button21.TabIndex = 29;
+            this.button21.Text = "清空";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(256, 229);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.TabIndex = 28;
+            this.button20.Text = "开始执行";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(19, 232);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(72, 16);
+            this.checkBox4.TabIndex = 27;
+            this.checkBox4.Text = "延迟执行";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // listBox4
+            // 
+            this.listBox4.AllowDrop = true;
+            this.listBox4.FormattingEnabled = true;
+            this.listBox4.ItemHeight = 12;
+            this.listBox4.Location = new System.Drawing.Point(6, 6);
+            this.listBox4.Name = "listBox4";
+            this.listBox4.Size = new System.Drawing.Size(338, 136);
+            this.listBox4.TabIndex = 1;
+            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
             // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage4.Controls.Add(this.checkBox7);
+            this.tabPage4.Controls.Add(this.checkBox6);
+            this.tabPage4.Controls.Add(this.checkBox5);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.label15);
             this.tabPage4.Controls.Add(this.label14);
@@ -694,9 +777,42 @@ namespace ffm
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "配置管理";
             // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(19, 106);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(78, 16);
+            this.checkBox7.TabIndex = 34;
+            this.checkBox7.Text = "后缀改jpg";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(19, 128);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(132, 16);
+            this.checkBox6.TabIndex = 33;
+            this.checkBox6.Text = "切片合并参数分辨率";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(19, 84);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(78, 16);
+            this.checkBox5.TabIndex = 32;
+            this.checkBox5.Text = "后缀改mp4";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(131, 141);
+            this.textBox11.Location = new System.Drawing.Point(131, 180);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(191, 21);
             this.textBox11.TabIndex = 31;
@@ -705,7 +821,7 @@ namespace ffm
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(24, 144);
+            this.label15.Location = new System.Drawing.Point(24, 183);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(101, 12);
             this.label15.TabIndex = 30;
@@ -714,7 +830,7 @@ namespace ffm
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(24, 99);
+            this.label14.Location = new System.Drawing.Point(24, 156);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 12);
             this.label14.TabIndex = 20;
@@ -722,7 +838,7 @@ namespace ffm
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(131, 96);
+            this.textBox10.Location = new System.Drawing.Point(131, 153);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(191, 21);
             this.textBox10.TabIndex = 20;
@@ -817,18 +933,63 @@ namespace ffm
             this.textBox9.TabIndex = 20;
             this.textBox9.WordWrap = false;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage3.Controls.Add(this.button13);
+            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Controls.Add(this.button12);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(350, 254);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "自定义命令";
+            // 
+            // button13
+            // 
+            this.button13.Enabled = false;
+            this.button13.Location = new System.Drawing.Point(304, 17);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(40, 20);
+            this.button13.TabIndex = 30;
+            this.button13.Text = "缓存";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(9, 17);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(289, 20);
+            this.comboBox2.TabIndex = 29;
+            this.comboBox2.TextChanged += new System.EventHandler(this.comboBox2_TextChanged);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(113, 213);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 28;
+            this.button12.Text = "执行";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // listBox3
             // 
             this.listBox3.AllowDrop = true;
             this.listBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 12;
+            this.listBox3.ItemHeight = 15;
             this.listBox3.Location = new System.Drawing.Point(461, 25);
             this.listBox3.Name = "listBox3";
             this.listBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listBox3.Size = new System.Drawing.Size(79, 268);
+            this.listBox3.Size = new System.Drawing.Size(79, 244);
             this.listBox3.TabIndex = 22;
             this.listBox3.Visible = false;
+            this.listBox3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox3_DrawItem);
             this.listBox3.SelectedValueChanged += new System.EventHandler(this.listBox3_SelectedValueChanged);
             this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox3_DragDrop);
             this.listBox3.DragOver += new System.Windows.Forms.DragEventHandler(this.listBox3_DragOver);
@@ -847,6 +1008,11 @@ namespace ffm
             this.button19.Visible = false;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.Active = false;
+            this.toolTip1.IsBalloon = true;
+            // 
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -859,38 +1025,6 @@ namespace ffm
             this.pictureBox12.TabIndex = 21;
             this.pictureBox12.TabStop = false;
             this.pictureBox12.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // processFileDtoBindingSource
-            // 
-            this.processFileDtoBindingSource.DataSource = typeof(ffm.ProcessFileDto);
-            // 
-            // trackBar21
-            // 
-            this.trackBar21.AutoSize = false;
-            this.trackBar21.LabelPlaces = ((uint)(0u));
-            this.trackBar21.Location = new System.Drawing.Point(4, 42);
-            this.trackBar21.Maximum = 100D;
-            this.trackBar21.Minimum = 0D;
-            this.trackBar21.MinimumSize = new System.Drawing.Size(100, 0);
-            this.trackBar21.Name = "trackBar21";
-            this.trackBar21.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.trackBar21.SelectTrackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.trackBar21.Size = new System.Drawing.Size(328, 35);
-            this.trackBar21.TabIndex = 20;
-            this.trackBar21.Text = "trackBar21";
-            this.trackBar21.TickColor = System.Drawing.Color.Black;
-            this.trackBar21.TickCount = 5;
-            this.trackBar21.TickLabelVisible = true;
-            this.trackBar21.TrackButtonClickColor = System.Drawing.Color.Blue;
-            this.trackBar21.TrackButtonColor1 = System.Drawing.Color.DarkGray;
-            this.trackBar21.TrackButtonColor2 = System.Drawing.Color.DarkGray;
-            this.trackBar21.TrackButtonSize = new System.Drawing.Size(18, 12);
-            this.trackBar21.TrackColor = System.Drawing.Color.Black;
-            this.trackBar21.TrackSelctedMode = ffm.TrackBar2.emTrackBarSelectedMode.Inner;
-            this.trackBar21.Value1 = 0D;
-            this.trackBar21.Value2 = 100D;
-            this.trackBar21.Value1Changed += new System.EventHandler(this.trackBar21_Value1Changed);
-            this.trackBar21.Value2Changed += new System.EventHandler(this.trackBar21_Value2Changed);
             // 
             // Form1
             // 
@@ -915,6 +1049,7 @@ namespace ffm
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -924,13 +1059,14 @@ namespace ffm
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1007,6 +1143,17 @@ namespace ffm
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.ListBox listBox4;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ListBox listBox5;
+        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox7;
     }
 }
 

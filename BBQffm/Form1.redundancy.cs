@@ -55,6 +55,26 @@ namespace ffm
                 checkBox3.Checked = Convert.ToBoolean(GetSettings("CHECKBOX3"));
             }
 
+            if (GetSettings("CHECKBOX4") != null)
+            {
+                checkBox4.Checked = Convert.ToBoolean(GetSettings("CHECKBOX4"));
+            }
+
+            if (GetSettings("CHECKBOX5") != null)
+            {
+                checkBox5.Checked = Convert.ToBoolean(GetSettings("CHECKBOX5"));
+            }
+
+            if (GetSettings("CHECKBOX6") != null)
+            {
+                checkBox6.Checked = Convert.ToBoolean(GetSettings("CHECKBOX6"));
+            }
+
+            if (GetSettings("CHECKBOX7") != null)
+            {
+                checkBox7.Checked = Convert.ToBoolean(GetSettings("CHECKBOX7"));
+            }
+
             if (GetSettings("TEXTBOX10") != null)
             {
                 Configuration.LOG_PATH = GetSettings("TEXTBOX10").ToString();
@@ -153,26 +173,53 @@ namespace ffm
 
         public String ConvertCmd(ProcessFileDto processFile)
         {
+            Boolean isIamge = IsAppointFileByFileName(processFile.processFile, Configuration.IMAGE_EXTENSIONS);
+
+            Console.WriteLine("bbqq " + isIamge + " d " + processFile.processFile);
+
             string strArg = "-i " + processFile.processFile + " ";
 
-            if (processFile.vf != null && !"".Equals(processFile.vf))
+            if (!isIamge && processFile.vf != null && !"".Equals(processFile.vf))
             {
                 strArg += "-vf " + processFile.vf + " ";
             }
-            else if (cutWidthFrame > 0 && cutHeightFrame > 0 && !(cutWidthFrame == widthFrame && cutHeightFrame == heightFrame))
+            else if (!isIamge && cutWidthFrame > 0 && cutHeightFrame > 0 && !(cutWidthFrame == widthFrame && cutHeightFrame == heightFrame))
             {
                 strArg += "-vf crop=" + cutWidthFrame + ":" + cutHeightFrame + ":" + widthFrameStart + ":" + heightFrameStart + " ";
             }
-            strArg += "-vcodec h264 ";
-            if (processFile.crf != null && !"".Equals(processFile.crf))
+
+            if (!isIamge)
             {
-                strArg += "-crf " + processFile.crf + " ";
+                strArg += "-vcodec h264 ";
             }
-            if (processFile.beginTime != null && !"".Equals(processFile.beginTime))
+
+            if (processFile.crf != null && !"".Equals(processFile.crf) && !"-1".Equals(processFile.crf))
+            {
+                if (isIamge)
+                {
+                    strArg += "-q:v " + processFile.crf + " ";
+                }
+                else
+                {
+                    strArg += "-crf " + processFile.crf + " ";
+                }
+            }
+
+            if (isIamge && !("").Equals(textBox7.Text))
+            {
+                string wide = textBox7.Text.Split(',')[0];
+                Console.WriteLine("bb2 " + textBox7.Text);
+                
+                strArg += "-vf \"scale = " + wide + ":-1\" ";
+            }
+
+            if (!isIamge && processFile.beginTime != null && !"".Equals(processFile.beginTime))
             {
                 strArg += "-acodec copy -ss " + processFile.beginTime + " -to " + processFile.endTime + " ";
             }
             strArg += processFile.targetFile + " ";
+
+            //Console.WriteLine("bbqq2 " + strArg);
 
             return strArg;
         }

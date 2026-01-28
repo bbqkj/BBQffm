@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ffm
 {
@@ -35,7 +36,7 @@ namespace ffm
 
             ProcessFileDto processFile = new ProcessFileDto();
             AssignmentProcessFile(path1, path2, processFile);
-            ConvertVideo(ConvertCmd(processFile));
+            ConvertVideo(ConvertCmd(processFile), path1);
             DeleteFileRecycleWithSetting(path1);
         }
 
@@ -298,9 +299,10 @@ namespace ffm
             ExecuteProcess(strArg, new DataReceivedEventHandler(OutputGetVideo));
             AdjustWindow();
             trackBar21.Maximum = millisecondTotal;
+            trackBar21.Value1 = 0;
             trackBar21.Value2 = millisecondTotal;
             trackBar21.Value1 = 0;
-            
+
         }
 
         public String GetDuration(string path)
@@ -331,13 +333,39 @@ namespace ffm
             }
         }
 
-        public void ConvertVideo(string strArg)
+        public void ConvertVideo(string strArg, string delPath)
         {
+            //Console.WriteLine("bbqq3 " + strArg);
             //textBox9.Text = textBox9.Text + generateLog(strArg);
-            ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo));
+            executeProcessDto = new ExecuteProcessDto();
+            if (!"".Equals(textBox4.Text) && !"".Equals(textBox3.Text))
+            {
+                executeProcessDto.timeDifference = TimeSpan.Parse(textBox4.Text).Subtract(TimeSpan.Parse(textBox3.Text));
+            }
+
+            if (checkBox4.Checked)
+            {
+                executeProcessDto.strArg = strArg;
+                executeProcessDto.outputConvertVideo = "OutputConvertVideo";
+                executeProcessDto.state = state;
+                executeProcessDto.path = delPath;
+
+                listBox4.Items.Add(JsonConvert.SerializeObject(executeProcessDto));
+                //listBox4.Items.Add(strArg);
+            }
+            else
+            {
+                Console.WriteLine("bbqq5 " + strArg);
+                ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo));
+            }
 
             progressBar1.Value = 100;
             label8.Text = "100%";
+        }
+
+        public void ConvertVideo(string strArg)
+        {
+            ConvertVideo(strArg, null);
         }
 
         //创建合并视频列表的文本
@@ -395,6 +423,9 @@ namespace ffm
             String audioDuration = GetDuration(audio);
 
             string strArg = "-stream_loop -1 -i \"" + mp4tmp + "\" -i \"" + audio + "\" -map 0:v -map 1:a -c:v copy -c:a aac -t " + audioDuration + " \"" + textBox5.Text + "\"";
+            TimeSpan timeDifference = TimeSpan.Parse(textBox4.Text).Subtract(TimeSpan.Parse(textBox3.Text));
+            executeProcessDto = new ExecuteProcessDto();
+            executeProcessDto.timeDifference = timeDifference;
             ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo));
 
             DeleteFile(mp4tmp);
@@ -409,6 +440,9 @@ namespace ffm
             String audio = GetMp3();
             String mp4tmpDuration = GetDuration(mp4tmp);
 
+            TimeSpan timeDifference = TimeSpan.Parse(textBox4.Text).Subtract(TimeSpan.Parse(textBox3.Text));
+            executeProcessDto = new ExecuteProcessDto();
+            executeProcessDto.timeDifference = timeDifference;
             string strArg = "-stream_loop -1 -i \"" + mp4tmp + "\" -i \"" + audio + "\" -map 0:v -map 1:a -c:v copy -c:a aac -t " + mp4tmpDuration + " \"" + textBox5.Text + "\"";
             ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo));
 
@@ -427,7 +461,14 @@ namespace ffm
             string strArg2 = "";
             for(int i = 1; i <= listBox3.Items.Count; i=i+2)
             {
-                strArg += "[0:v]trim=start=" + ConvertToTotalSeconds(listBox3.Items[i - 1] as string) + ":end=" + ConvertToTotalSeconds(listBox3.Items[i] as string) + ",setpts=PTS-STARTPTS[v" + (i/2 + 1) + "];" +
+                strArg += "[0:v]trim=start=" + ConvertToTotalSeconds(listBox3.Items[i - 1] as string) + ":end=" + ConvertToTotalSeconds(listBox3.Items[i] as string) + ",setpts=PTS-STARTPTS";
+
+                if(checkBox6.Checked)
+                {
+                    strArg += ",scale=" + textBox8.Text.Replace(",", ":") + ":force_original_aspect_ratio=decrease,pad=" + textBox8.Text.Replace(",", ":") + ":(ow-iw)/2:(oh-ih)/2,setsar=1";
+                }
+
+                strArg += "[v" + (i/2 + 1) + "];" +
                     "[0:a]atrim=start=" + ConvertToTotalSeconds(listBox3.Items[i - 1] as string) + ":end=" + ConvertToTotalSeconds(listBox3.Items[i] as string) + ",asetpts=PTS-STARTPTS[a" + (i/2 + 1) + "];";
                 strArg2 += "[v" + (i/2 + 1) + "]";
                 strArg2 += "[a" + (i/2 + 1) + "]";
@@ -444,7 +485,23 @@ namespace ffm
             strArg += strArg2 + "concat=n="+ listBox3.Items.Count/2 + ":v=1:a=1[outv][outa]\"";
             strArg += " -map \"[outv]\" -map \"[outa]\" ";
             strArg += "\"" + textBox2.Text + "\"";
-            ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo2));
+
+            executeProcessDto = new ExecuteProcessDto();
+            executeProcessDto.timeDifference = timeDifference2;
+            if (checkBox4.Checked)
+            {
+                executeProcessDto.strArg = strArg;
+                executeProcessDto.outputConvertVideo = "OutputConvertVideo";
+                executeProcessDto.state = state;
+                executeProcessDto.path = textBox1.Text;
+                listBox4.Items.Add(JsonConvert.SerializeObject(executeProcessDto));
+                //listBox4.Items.Add(strArg);
+            }
+            else
+            {
+                ExecuteProcess(strArg, new DataReceivedEventHandler(OutputConvertVideo));
+            }
+            
 
             progressBar1.Value = 100;
             label8.Text = "100%";
@@ -458,41 +515,16 @@ namespace ffm
                 if (output.Data.Contains("Duration: "))
                 {
                     total = GetValueBetween(output.Data, "Duration: ", ",");
-                    TimeSpan timeTotal = TimeSpan.Parse(total);
-                    millisecondTotal = timeTotal.TotalMilliseconds;
-                }
-
-                if (output.Data.Contains("time=") && output.Data.Contains("bitrate="))
-                {
-                    string value = GetValueBetween(output.Data, "time=", " ");
                     try
                     {
-                        TimeSpan time = TimeSpan.Parse(value);
-                        double milliseconds = time.TotalMilliseconds;
-                        TimeSpan timeDifference = TimeSpan.Parse(textBox4.Text).Subtract(TimeSpan.Parse(textBox3.Text));
-
-                        progressBar1.Value = (int)(milliseconds * 100 / timeDifference.TotalMilliseconds);
-                        label7.Text = "进度:" + value + " ~ " + timeDifference.ToString("hh\\:mm\\:ss\\.fff") + " / " + total + " ";
-                        label8.Text = Math.Round(milliseconds * 100 / timeDifference.TotalMilliseconds, 2) + "%";
+                        TimeSpan timeTotal = TimeSpan.Parse(total);
+                        millisecondTotal = timeTotal.TotalMilliseconds;
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("捕获到异常：" + ex.Message);
+                        Console.WriteLine("捕获到异常2：" + ex.Message);
                     }
-                }
-            }
-        }
-
-        private void OutputConvertVideo2(object sendProcess, DataReceivedEventArgs output)
-        {
-            if (!String.IsNullOrEmpty(output.Data))
-            {
-                //处理方法...
-                if (output.Data.Contains("Duration: "))
-                {
-                    total = GetValueBetween(output.Data, "Duration: ", ",");
-                    TimeSpan timeTotal = TimeSpan.Parse(total);
-                    millisecondTotal = timeTotal.TotalMilliseconds;
+                    
                 }
 
                 if (output.Data.Contains("time=") && output.Data.Contains("bitrate="))
@@ -502,11 +534,11 @@ namespace ffm
                     {
                         TimeSpan time = TimeSpan.Parse(value);
                         double milliseconds = time.TotalMilliseconds;
-                        //TimeSpan timeDifference = TimeSpan.Parse(textBox4.Text).Subtract(TimeSpan.Parse(textBox3.Text));
+                        //TimeSpan timeDifference = TimeSpan.Parse(executeProcessDto.textBox4Text).Subtract(TimeSpan.Parse(executeProcessDto.textBox3Text));
 
-                        progressBar1.Value = (int)(milliseconds * 100 / timeDifference2.TotalMilliseconds);
-                        label7.Text = "进度:" + value + " ~ " + timeDifference2.ToString("hh\\:mm\\:ss\\.fff") + " / " + total + " ";
-                        label8.Text = Math.Round(milliseconds * 100 / timeDifference2.TotalMilliseconds, 2) + "%";
+                        progressBar1.Value = (int)(milliseconds * 100 / executeProcessDto.timeDifference.TotalMilliseconds);
+                        label7.Text = "进度:" + value + " ~ " + executeProcessDto.timeDifference.ToString("hh\\:mm\\:ss\\.fff") + " / " + total + " ";
+                        label8.Text = Math.Round(milliseconds * 100 / executeProcessDto.timeDifference.TotalMilliseconds, 2) + "%";
                     }
                     catch (Exception ex)
                     {
@@ -525,8 +557,16 @@ namespace ffm
                 {
                     total = GetValueBetween(output.Data, "Duration: ", ",");
                     label7.Text = "进度:" + "0 ~ ?" + " / " + total + " ";
-                    TimeSpan timeTotal = TimeSpan.Parse(total);
-                    millisecondTotal = timeTotal.TotalMilliseconds;
+                    try
+                    {
+                        TimeSpan timeTotal = TimeSpan.Parse(total);
+                        millisecondTotal = timeTotal.TotalMilliseconds;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("捕获到异常1：" + ex.Message);
+                    }
+                    
                    /* trackBar21.Maximum = millisecondTotal;
                     trackBar21.Value1 = 0;
                     trackBar21.Value2 = millisecondTotal;*/
@@ -535,7 +575,7 @@ namespace ffm
                 }
 
                 //通过正则表达式获取信息里面的宽度信息
-                Regex regex = new Regex("(\\d{2,4})x(\\d{2,4})", RegexOptions.Compiled);
+                Regex regex = new Regex("(\\d{2,5})x(\\d{2,5})", RegexOptions.Compiled);
                 Match m = regex.Match(output.Data);
                 if (m.Success && !label6.Text.Contains("宽:"))
                 {

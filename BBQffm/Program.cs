@@ -53,4 +53,18 @@ namespace ffm
         { get; set; }
 
     }
+    public class ExecuteProcessDto
+    {
+        public String strArg // 执行命令
+        { get; set; }
+        public String path // 
+        { get; set; }
+        public String outputConvertVideo  // 输出方法
+        { get; set; }
+        public TimeSpan timeDifference  // timeDifference
+        { get; set; }
+        public String state  // state
+        { get; set; }
+
+    }
 }

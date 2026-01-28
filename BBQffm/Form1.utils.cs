@@ -111,10 +111,26 @@ namespace ffm
 
         public String coverPath(String oldPath, String addPath)
         {
+            return coverPath(oldPath, addPath, false);
+        }
+
+        public String coverPath(String oldPath, String addPath, Boolean isModifySuffix)
+        {
             string[] paths = oldPath.Split('.');
             string path2 = paths[paths.Length - 2];
             //path2 = oldPath.Replace(path2, path2 + addPath);
             path2 = ReplaceLast(oldPath, path2 + ".", path2 + addPath + ".");
+            if (isModifySuffix && (checkBox5.Checked || checkBox7.Checked))
+            {
+                string suffix = paths[paths.Length - 1];
+                if(IsAppointFile(suffix, Configuration.VIDEO_EXTENSIONS))
+                {
+                    path2 = ReplaceLast(path2, "." + suffix, ".mp4");
+                } else if (IsAppointFile(suffix, Configuration.IMAGE_EXTENSIONS))
+                {
+                    path2 = ReplaceLast(path2, "." + suffix, ".jpg");
+                }
+            }
             return path2;
         }
 
@@ -124,8 +140,8 @@ namespace ffm
             {
                 textBox9.Text = textBox9.Text + generateLog(strArg);
             }
-            Console.WriteLine(strArg);
-            
+            Console.WriteLine("bbqq4 " + strArg);
+
             Process p = new Process();//建立外部调用线程
             string ffmpegPath = System.AppDomain.CurrentDomain.BaseDirectory
                + "\\ffmpeg.exe";
@@ -153,7 +169,12 @@ namespace ffm
 
         void DeleteFileRecycleWithSetting(String path)
         {
-            if (File.Exists(path) && checkBox3.Checked)
+            DeleteFileRecycleWithSetting(path, false);
+        }
+
+        void DeleteFileRecycleWithSetting(String path, Boolean isForce)
+        {
+            if (File.Exists(path) && checkBox3.Checked && (isForce || !checkBox4.Checked))
             {
                 FileSystem.DeleteFile(path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
             }
@@ -299,6 +320,19 @@ namespace ffm
             {
                 return null;
             }
+        }
+
+        // 判断是否是指定文件
+        public static Boolean IsAppointFile(String suffix, String imageExtension)
+        {
+            String extension = suffix;
+            return imageExtension.Contains(extension.ToLowerInvariant());
+        }
+        public static Boolean IsAppointFileByFileName(String fileName, String imageExtension)
+        {
+            string[] paths = fileName.Split('.');
+            String extension = paths[paths.Length - 1].Replace("\"", "").Replace("\'", "");
+            return imageExtension.Contains(extension.ToLowerInvariant());
         }
     }
 }
