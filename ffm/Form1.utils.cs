@@ -8,6 +8,7 @@ using System.Net;
 using System.Diagnostics;
 using Microsoft.Win32;
 using Microsoft.VisualBasic.FileIO;
+using System.Globalization;
 
 namespace ffm
 {
@@ -140,7 +141,7 @@ namespace ffm
             {
                 textBox9.Text = textBox9.Text + generateLog(strArg);
             }
-            Console.WriteLine("bbqq4 " + strArg);
+            Console.WriteLine("执行命令 ExecuteProcess " + strArg);
 
             Process p = new Process();//建立外部调用线程
             string ffmpegPath = System.AppDomain.CurrentDomain.BaseDirectory
@@ -159,6 +160,27 @@ namespace ffm
             p.Dispose();//释放资源
         }
 
+    
+        private string RunFFProbe(string arguments)
+        {
+            using (Process p = new Process())
+            {
+                Console.WriteLine("执行命令 RunFFProbe " + arguments);
+                p.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ffprobe.exe");
+                p.StartInfo.Arguments = arguments;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                // p.StartInfo.RedirectStandardError = true; // 捕获错误输出
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+                string output = p.StandardOutput.ReadToEnd();
+                //string error = p.StandardError.ReadToEnd();
+                p.WaitForExit();
+                //if (!string.IsNullOrEmpty(error))
+                //    Console.WriteLine("FFProbe stderr: " + error);
+                return output;
+            }
+        }
         public void DeleteFile(String path)
         {
             if(File.Exists(path))
@@ -333,6 +355,12 @@ namespace ffm
             string[] paths = fileName.Split('.');
             String extension = paths[paths.Length - 1].Replace("\"", "").Replace("\'", "");
             return imageExtension.Contains(extension.ToLowerInvariant());
+        }
+
+        private string FormatTime(TimeSpan time)
+        {
+            // 输出秒数，保留 9 位小数（微秒级精度）
+            return time.TotalSeconds.ToString("F9", CultureInfo.InvariantCulture);
         }
     }
 }

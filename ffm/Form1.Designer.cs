@@ -36,18 +36,17 @@ namespace ffm
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.processFileDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.trackBar21 = new ffm.TrackBar2();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -88,6 +87,13 @@ namespace ffm
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
@@ -110,11 +116,13 @@ namespace ffm
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.button19 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.labelStatus = new System.Windows.Forms.Label();
             this.pictureBox12 = new ffm.NewPictureBox();
+            this.processFileDtoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.trackBar21 = new ffm.TrackBar2();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -122,9 +130,11 @@ namespace ffm
             this.tabPage2.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -183,6 +193,7 @@ namespace ffm
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel1.Controls.Add(this.checkBox8);
             this.panel1.Controls.Add(this.numericUpDown2);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.textBox1);
@@ -192,6 +203,17 @@ namespace ffm
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(338, 52);
             this.panel1.TabIndex = 7;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(287, 3);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(48, 16);
+            this.checkBox8.TabIndex = 20;
+            this.checkBox8.Text = "置顶";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // numericUpDown2
             // 
@@ -259,10 +281,6 @@ namespace ffm
             this.comboBox1.TabIndex = 8;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // processFileDtoBindingSource
-            // 
-            this.processFileDtoBindingSource.DataSource = typeof(ffm.ProcessFileDto);
-            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
@@ -310,34 +328,6 @@ namespace ffm
             this.label9.Size = new System.Drawing.Size(11, 12);
             this.label9.TabIndex = 15;
             this.label9.Text = "~";
-            // 
-            // trackBar21
-            // 
-            this.trackBar21.AutoSize = false;
-            this.trackBar21.LabelPlaces = ((uint)(0u));
-            this.trackBar21.Location = new System.Drawing.Point(4, 42);
-            this.trackBar21.Maximum = 100D;
-            this.trackBar21.Minimum = 0D;
-            this.trackBar21.MinimumSize = new System.Drawing.Size(100, 0);
-            this.trackBar21.Name = "trackBar21";
-            this.trackBar21.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.trackBar21.SelectTrackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.trackBar21.Size = new System.Drawing.Size(328, 35);
-            this.trackBar21.TabIndex = 20;
-            this.trackBar21.Text = "trackBar21";
-            this.trackBar21.TickColor = System.Drawing.Color.Black;
-            this.trackBar21.TickCount = 5;
-            this.trackBar21.TickLabelVisible = true;
-            this.trackBar21.TrackButtonClickColor = System.Drawing.Color.Blue;
-            this.trackBar21.TrackButtonColor1 = System.Drawing.Color.DarkGray;
-            this.trackBar21.TrackButtonColor2 = System.Drawing.Color.DarkGray;
-            this.trackBar21.TrackButtonSize = new System.Drawing.Size(18, 12);
-            this.trackBar21.TrackColor = System.Drawing.Color.Black;
-            this.trackBar21.TrackSelctedMode = ffm.TrackBar2.emTrackBarSelectedMode.Inner;
-            this.trackBar21.Value1 = 0D;
-            this.trackBar21.Value2 = 100D;
-            this.trackBar21.Value1Changed += new System.EventHandler(this.trackBar21_Value1Changed);
-            this.trackBar21.Value2Changed += new System.EventHandler(this.trackBar21_Value2Changed);
             // 
             // textBox4
             // 
@@ -388,7 +378,7 @@ namespace ffm
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 313);
+            this.label7.Location = new System.Drawing.Point(12, 313);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 16;
@@ -759,6 +749,9 @@ namespace ffm
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabPage4.Controls.Add(this.checkBox11);
+            this.tabPage4.Controls.Add(this.groupBox3);
+            this.tabPage4.Controls.Add(this.checkBox9);
             this.tabPage4.Controls.Add(this.checkBox7);
             this.tabPage4.Controls.Add(this.checkBox6);
             this.tabPage4.Controls.Add(this.checkBox5);
@@ -777,10 +770,93 @@ namespace ffm
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "配置管理";
             // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(191, 103);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(138, 16);
+            this.checkBox11.TabIndex = 40;
+            this.checkBox11.Text = "h264_nvenc(GPU加速)";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.OldLace;
+            this.groupBox3.Controls.Add(this.radioButton3);
+            this.groupBox3.Controls.Add(this.checkBox10);
+            this.groupBox3.Controls.Add(this.radioButton2);
+            this.groupBox3.Controls.Add(this.radioButton1);
+            this.groupBox3.Location = new System.Drawing.Point(182, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(159, 87);
+            this.groupBox3.TabIndex = 40;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "快速剪辑";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(14, 52);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(137, 16);
+            this.radioButton3.TabIndex = 40;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "智能编码(精确-略快)";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Location = new System.Drawing.Point(9, 20);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(132, 16);
+            this.checkBox10.TabIndex = 36;
+            this.checkBox10.Text = "开启(关键帧不编码)";
+            this.checkBox10.UseVisualStyleBackColor = true;
+            this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(14, 67);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(137, 16);
+            this.radioButton2.TabIndex = 39;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "全段编码(精确-略慢)";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(14, 37);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(137, 16);
+            this.radioButton1.TabIndex = 38;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "帧 同 步(粗略-极速)";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(25, 144);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(192, 16);
+            this.checkBox9.TabIndex = 35;
+            this.checkBox9.Text = "允许加载扩展名(本地m3u8专用)";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            // 
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(19, 106);
+            this.checkBox7.Location = new System.Drawing.Point(25, 100);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(78, 16);
             this.checkBox7.TabIndex = 34;
@@ -791,18 +867,18 @@ namespace ffm
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(19, 128);
+            this.checkBox6.Location = new System.Drawing.Point(25, 122);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(132, 16);
+            this.checkBox6.Size = new System.Drawing.Size(192, 16);
             this.checkBox6.TabIndex = 33;
-            this.checkBox6.Text = "切片合并参数分辨率";
+            this.checkBox6.Text = "统一参数分辨率(切片合并专用)";
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(19, 84);
+            this.checkBox5.Location = new System.Drawing.Point(25, 78);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(78, 16);
             this.checkBox5.TabIndex = 32;
@@ -812,7 +888,7 @@ namespace ffm
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(131, 180);
+            this.textBox11.Location = new System.Drawing.Point(130, 193);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(191, 21);
             this.textBox11.TabIndex = 31;
@@ -821,7 +897,7 @@ namespace ffm
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(24, 183);
+            this.label15.Location = new System.Drawing.Point(23, 196);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(101, 12);
             this.label15.TabIndex = 30;
@@ -830,7 +906,7 @@ namespace ffm
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(24, 156);
+            this.label14.Location = new System.Drawing.Point(23, 169);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(53, 12);
             this.label14.TabIndex = 20;
@@ -838,7 +914,7 @@ namespace ffm
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(131, 153);
+            this.textBox10.Location = new System.Drawing.Point(130, 166);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(191, 21);
             this.textBox10.TabIndex = 20;
@@ -847,7 +923,7 @@ namespace ffm
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(19, 62);
+            this.checkBox3.Location = new System.Drawing.Point(25, 56);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(132, 16);
             this.checkBox3.TabIndex = 29;
@@ -858,7 +934,7 @@ namespace ffm
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(19, 40);
+            this.checkBox2.Location = new System.Drawing.Point(25, 34);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(84, 16);
             this.checkBox2.TabIndex = 28;
@@ -869,7 +945,7 @@ namespace ffm
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(19, 18);
+            this.checkBox1.Location = new System.Drawing.Point(25, 12);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
             this.checkBox1.TabIndex = 26;
@@ -879,7 +955,7 @@ namespace ffm
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(115, 211);
+            this.button11.Location = new System.Drawing.Point(114, 224);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(97, 23);
             this.button11.TabIndex = 27;
@@ -999,7 +1075,7 @@ namespace ffm
             // button19
             // 
             this.button19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button19.Location = new System.Drawing.Point(461, 298);
+            this.button19.Location = new System.Drawing.Point(461, 283);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(79, 23);
             this.button19.TabIndex = 28;
@@ -1013,6 +1089,15 @@ namespace ffm
             this.toolTip1.Active = false;
             this.toolTip1.IsBalloon = true;
             // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(361, 313);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(35, 12);
+            this.labelStatus.TabIndex = 29;
+            this.labelStatus.Text = "耗时 ";
+            // 
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1020,18 +1105,51 @@ namespace ffm
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.newHeight = 0;
             this.pictureBox12.newWidth = 0;
-            this.pictureBox12.Size = new System.Drawing.Size(181, 299);
+            this.pictureBox12.Size = new System.Drawing.Size(181, 284);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox12.TabIndex = 21;
             this.pictureBox12.TabStop = false;
             this.pictureBox12.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // processFileDtoBindingSource
+            // 
+            this.processFileDtoBindingSource.DataSource = typeof(ffm.ProcessFileDto);
+            // 
+            // trackBar21
+            // 
+            this.trackBar21.AutoSize = false;
+            this.trackBar21.LabelPlaces = ((uint)(0u));
+            this.trackBar21.Location = new System.Drawing.Point(4, 42);
+            this.trackBar21.Maximum = 100D;
+            this.trackBar21.Minimum = 0D;
+            this.trackBar21.MinimumSize = new System.Drawing.Size(100, 0);
+            this.trackBar21.Name = "trackBar21";
+            this.trackBar21.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.trackBar21.SelectTrackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.trackBar21.Size = new System.Drawing.Size(328, 35);
+            this.trackBar21.TabIndex = 20;
+            this.trackBar21.Text = "trackBar21";
+            this.trackBar21.TickColor = System.Drawing.Color.Black;
+            this.trackBar21.TickCount = 5;
+            this.trackBar21.TickLabelVisible = true;
+            this.trackBar21.TrackButtonClickColor = System.Drawing.Color.Blue;
+            this.trackBar21.TrackButtonColor1 = System.Drawing.Color.DarkGray;
+            this.trackBar21.TrackButtonColor2 = System.Drawing.Color.DarkGray;
+            this.trackBar21.TrackButtonSize = new System.Drawing.Size(18, 12);
+            this.trackBar21.TrackColor = System.Drawing.Color.Black;
+            this.trackBar21.TrackSelctedMode = ffm.TrackBar2.emTrackBarSelectedMode.Inner;
+            this.trackBar21.Value1 = 0D;
+            this.trackBar21.Value2 = 100D;
+            this.trackBar21.Value1Changed += new System.EventHandler(this.trackBar21_Value1Changed);
+            this.trackBar21.Value2Changed += new System.EventHandler(this.trackBar21_Value2Changed);
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 330);
+            this.ClientSize = new System.Drawing.Size(554, 334);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.pictureBox12);
@@ -1049,7 +1167,6 @@ namespace ffm
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1063,10 +1180,13 @@ namespace ffm
             this.tabPage6.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processFileDtoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1154,6 +1274,15 @@ namespace ffm
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.CheckBox checkBox11;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
 

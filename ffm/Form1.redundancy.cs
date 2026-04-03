@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace ffm
 {
@@ -73,6 +74,36 @@ namespace ffm
             if (GetSettings("CHECKBOX7") != null)
             {
                 checkBox7.Checked = Convert.ToBoolean(GetSettings("CHECKBOX7"));
+            }
+
+            if (GetSettings("CHECKBOX9") != null)
+            {
+                checkBox9.Checked = Convert.ToBoolean(GetSettings("CHECKBOX9"));
+            }
+
+            if (GetSettings("CHECKBOX10") != null)
+            {
+                checkBox10.Checked = Convert.ToBoolean(GetSettings("CHECKBOX10"));
+            }
+
+            if (GetSettings("CHECKBOX11") != null)
+            {
+                checkBox11.Checked = Convert.ToBoolean(GetSettings("CHECKBOX11"));
+            }
+
+            if (GetSettings("RADIOBUTTON1") != null)
+            {
+                radioButton1.Checked = Convert.ToBoolean(GetSettings("RADIOBUTTON1"));
+            }
+
+            if (GetSettings("RADIOBUTTON2") != null)
+            {
+                radioButton2.Checked = Convert.ToBoolean(GetSettings("RADIOBUTTON2"));
+            }
+
+            if (GetSettings("RADIOBUTTON3") != null)
+            {
+                radioButton3.Checked = Convert.ToBoolean(GetSettings("RADIOBUTTON3"));
             }
 
             if (GetSettings("TEXTBOX10") != null)
@@ -171,35 +202,84 @@ namespace ffm
             processFile.endTime = textBox4.Text;
         }
 
+        private string BuildCopySegmentCommand(string input, double startSec, double endSec, string output)
+        {
+            // 使用快速剪辑的流复制模式，-ss 在前
+            return $"-ss {startSec.ToString("F9", CultureInfo.InvariantCulture)} -to {endSec.ToString("F9", CultureInfo.InvariantCulture)} -i \"{input}\" -c copy \"{output}\"";
+        }
+
+        private string BuildReencodeSegmentCommand(string input, double startSec, double endSec, string output, ProcessFileDto processFile)
+        {
+            // 时间参数放在 -i 之后以实现精确 seek
+            string strArg = $"-i \"{input}\" -ss {startSec.ToString("F9", CultureInfo.InvariantCulture)} -to {endSec.ToString("F9", CultureInfo.InvariantCulture)} ";
+
+            // 编码参数（参考原代码中的普通剪辑部分）
+            if (checkBox11.Checked)
+                strArg += "-c:v h264_nvenc ";
+            else
+                strArg += "-c:v libx264 ";
+            strArg += "-c:a aac "; // 重编码音频
+
+            // 添加 CRF 等参数
+            if (!checkBox9.Checked && processFile.crf != null && !"".Equals(processFile.crf) && !"-1".Equals(processFile.crf))
+            {
+                if (checkBox11.Checked)
+                    strArg += "-cq " + processFile.crf + " ";
+                else
+                    strArg += "-crf " + processFile.crf + " ";
+            }
+
+            // 添加滤镜（裁剪、缩放等）
+            if (!checkBox9.Checked && processFile.vf != null && !"".Equals(processFile.vf))
+                strArg += "-vf " + processFile.vf + " ";
+            else if (!checkBox9.Checked && cutWidthFrame > 0 && cutHeightFrame > 0 && !(cutWidthFrame == widthFrame && cutHeightFrame == heightFrame))
+                strArg += "-vf crop=" + cutWidthFrame + ":" + cutHeightFrame + ":" + widthFrameStart + ":" + heightFrameStart + " ";
+
+            strArg += output + " ";
+            return strArg;
+        }
         public String ConvertCmd(ProcessFileDto processFile)
         {
             Boolean isIamge = IsAppointFileByFileName(processFile.processFile, Configuration.IMAGE_EXTENSIONS);
 
             Console.WriteLine("bbqq " + isIamge + " d " + processFile.processFile);
+            string strArg = "";
 
-            string strArg = "-i " + processFile.processFile + " ";
+            if (checkBox9.Checked)
+            {
+                strArg += "-allowed_extensions ALL ";
+            }
 
-            if (!isIamge && processFile.vf != null && !"".Equals(processFile.vf))
+            if (checkBox10.Checked && !isIamge && processFile.beginTime != null && !"".Equals(processFile.beginTime))
+            {
+                strArg += "-ss " + processFile.beginTime + " -to " + processFile.endTime + " ";
+            }
+
+            strArg += "-i " + processFile.processFile + " ";
+
+
+            if (!checkBox9.Checked && !isIamge && processFile.vf != null && !"".Equals(processFile.vf))
             {
                 strArg += "-vf " + processFile.vf + " ";
             }
-            else if (!isIamge && cutWidthFrame > 0 && cutHeightFrame > 0 && !(cutWidthFrame == widthFrame && cutHeightFrame == heightFrame))
+            else if (!checkBox9.Checked && !isIamge && cutWidthFrame > 0 && cutHeightFrame > 0 && !(cutWidthFrame == widthFrame && cutHeightFrame == heightFrame))
             {
                 strArg += "-vf crop=" + cutWidthFrame + ":" + cutHeightFrame + ":" + widthFrameStart + ":" + heightFrameStart + " ";
             }
 
-            if (!isIamge)
-            {
-                strArg += "-vcodec h264 ";
-            }
+            // old
 
-            if (processFile.crf != null && !"".Equals(processFile.crf) && !"-1".Equals(processFile.crf))
+            if (!checkBox9.Checked && processFile.crf != null && !"".Equals(processFile.crf) && !"-1".Equals(processFile.crf))
             {
                 if (isIamge)
                 {
                     strArg += "-q:v " + processFile.crf + " ";
                 }
-                else
+                else if (checkBox11.Checked)
+                {
+                    strArg += "-cq " + processFile.crf + " ";
+                }
+                else 
                 {
                     strArg += "-crf " + processFile.crf + " ";
                 }
@@ -213,13 +293,53 @@ namespace ffm
                 strArg += "-vf \"scale = " + wide + ":-1\" ";
             }
 
-            if (!isIamge && processFile.beginTime != null && !"".Equals(processFile.beginTime))
+
+            if (!isIamge && checkBox10.Checked) // 快速剪辑
             {
+                if(!radioButton1.Checked && !radioButton2.Checked)
+                {
+                    strArg += "-c copy ";
+                }
+                //strArg += "-c:a copy ";
+                if (radioButton1.Checked) // 帧同步
+                {
+                    strArg += "-c copy ";
+                    strArg += "-avoid_negative_ts make_zero ";
+
+                }
+                else if (radioButton2.Checked)
+                {
+                    if (checkBox11.Checked)
+                    {
+                        strArg += "-c:v h264_nvenc ";
+                    }
+                    else
+                    {
+                        strArg += "-c:v libx264 ";
+                    }
+                }
+            }
+            else if(!isIamge && checkBox9.Checked) // 本地m3u8
+            {
+                strArg += "-c copy -bsf:a aac_adtstoasc ";
+            }
+            // 普通剪辑
+            else if (!isIamge && processFile.beginTime != null && !"".Equals(processFile.beginTime))
+            {
+                if (checkBox11.Checked)
+                {
+                    strArg += "-c:v h264_nvenc ";
+                }
+                else
+                {
+                    strArg += "-c:v libx264 ";
+                }
                 strArg += "-acodec copy -ss " + processFile.beginTime + " -to " + processFile.endTime + " ";
             }
             strArg += processFile.targetFile + " ";
 
             //Console.WriteLine("bbqq2 " + strArg);
+
 
             return strArg;
         }

@@ -449,7 +449,9 @@ namespace ffm
             strArg += textBox1.Text + "\" -i " + Configuration.PIC_PATH + "-1.jpg -map 1 -map 0 -c copy -disposition:0 attached_pic \"";
             strArg += textBox2.Text + "\" ";//-y 
             state = "设置封面-合成";
-            ConvertVideo(strArg);
+            LinkedList<String> deleteFileList = new LinkedList<String>();
+            deleteFileList.AddLast(Configuration.PIC_PATH + "-1.jpg");
+            ConvertVideo(strArg, deleteFileList);
             DeleteFile(Configuration.PIC_PATH + "-1.jpg");
             DeleteFileRecycleWithSetting(textBox1.Text);
         }
@@ -509,14 +511,40 @@ namespace ffm
                     }
                     ExecuteProcessDto executeProcessDto = JsonConvert.DeserializeObject<ExecuteProcessDto>(listStrArg);
                     state = "批量执行 " + executeProcessDto.state;
+                    // 根据字符串选择处理函数
+                    DataReceivedEventHandler handler = OutputConvertVideo;
+                    if (executeProcessDto.outputConvertVideo == "OutputGetPicBase")
+                    {
+                        handler = OutputGetPicBase; 
+                    }
+
                     progressBar1.Value = 0;
                     label8.Text = "0%";
-                    ExecuteProcess(executeProcessDto.strArg, new DataReceivedEventHandler(OutputConvertVideo));
+
+                    if (executeProcessDto.strArgList != null && executeProcessDto.strArgList.Count > 0)
+                    {
+                        foreach (string singleArg in executeProcessDto.strArgList)
+                        {
+                            ExecuteProcess(singleArg, new DataReceivedEventHandler(OutputGetPicBase));
+                            
+                            //ExecuteProcess(singleArg, handler);
+                        }
+                    }
+                    //Thread.Sleep(3000);
+                    if (executeProcessDto.deleteFileList != null && executeProcessDto.deleteFileList.Count > 0)
+                    {
+                        foreach (string deleteFile in executeProcessDto.deleteFileList)
+                        {
+                            Console.WriteLine("删除 " + deleteFile);
+                            DeleteFile(deleteFile);
+                        }
+                    }
                     progressBar1.Value = 100;
                     label8.Text = "100%";
                     listBox4.Items.Remove(listStrArg);
                     listBox5.Items.Add(listStrArg);
                     DeleteFileRecycleWithSetting(executeProcessDto.path, true);
+                    //Thread.Sleep(300);
                 }
             }
 
@@ -620,6 +648,25 @@ namespace ffm
         {
             SetSettings("CHECKBOX7", checkBox7.Checked);
         }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX9", checkBox9.Checked);
+        }
+
+        private void checkBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX10", checkBox10.Checked);
+            if (!checkBox10.Checked)
+            {
+                radioButton1.Checked = false;
+                radioButton2.Checked = false;
+                radioButton3.Checked = false;
+            }
+            //SetSettings("RADIOBUTTON2", radioButton2.Checked);
+            //SetSettings("RADIOBUTTON1", radioButton1.Checked);
+        }
+
         private void button14_Click(object sender, EventArgs e)
         {
             textBox9.Text = "";
@@ -731,7 +778,14 @@ namespace ffm
             state = "切片并合并";
             await Task.Run(() =>
             {
-                MergeSliceVideo();
+                if (checkBox10.Checked)
+                {
+                    MergeSliceVideo();
+                }
+                else
+                {
+                    MergeSliceVideoOld();
+                }
             });
         }
 
@@ -831,5 +885,30 @@ namespace ffm
             }
         }
 
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = checkBox8.Checked;
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("RADIOBUTTON1", radioButton1.Checked);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            SetSettings("RADIOBUTTON2", radioButton2.Checked);
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("CHECKBOX11", checkBox11.Checked);
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            SetSettings("RADIOBUTTON3", radioButton3.Checked);
+        }
     }
 }

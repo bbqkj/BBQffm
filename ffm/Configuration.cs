@@ -15,7 +15,7 @@ namespace ffm
 
         public static String CUSTOM_EXTENSIONS = "webp、";
         public static String IMAGE_EXTENSIONS = "bmp、jpg、jpeg、png、webp、";
-        public static String VIDEO_EXTENSIONS = "mp4、3gp、avi、flv、mov、rmvb、wmv、mpg、mpeg、rm、ram、swf、gif、";
+        public static String VIDEO_EXTENSIONS = "mp4、3gp、avi、flv、mov、rmvb、wmv、mpg、mpeg、rm、ram、swf、gif、ts、m3u8";
     }
    
 }

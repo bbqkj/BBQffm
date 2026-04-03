@@ -55,8 +55,8 @@ namespace ffm
     }
     public class ExecuteProcessDto
     {
-        public String strArg // 执行命令
-        { get; set; }
+        public LinkedList<string> strArgList { get; set; }      // 命令参数列表（原strArg改为List）
+        public LinkedList<string> deleteFileList { get; set; }  // 需要删除的文件列表
         public String path // 
         { get; set; }
         public String outputConvertVideo  // 输出方法
@@ -65,6 +65,7 @@ namespace ffm
         { get; set; }
         public String state  // state
         { get; set; }
+
 
     }
 }
