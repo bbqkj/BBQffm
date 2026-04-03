@@ -5,10 +5,13 @@ c#编写 基于ffmpeg的视频裁剪工具
 @[TOC](c#编写基于ffmpeg的视频裁剪)
 ## 更新变化
 2026-04-04
+
 注：极速精确剪辑需要 ffprobe.exe 也扔到同目录
+
 新增支持极速精确剪辑等优化剪辑速度的选项、支持m3u8转mp4、延迟执行有些复杂但是执行很快的命令不能用 改的麻烦懒得改了
 
 <img width="554" height="360" alt="image" src="https://github.com/user-attachments/assets/558a939c-ee7e-49f1-9acd-fe23a58b2760" />
+
 <img width="554" height="360" alt="image" src="https://github.com/user-attachments/assets/996050b5-00f9-4292-9a08-87fc8cc1d6fc" />
 
 
