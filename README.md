@@ -3,6 +3,14 @@ c#编写 基于ffmpeg的视频裁剪工具
 下载ffmpeg.exe放到同目录即可
 
 @[TOC](c#编写基于ffmpeg的视频裁剪)
+## 更新变化
+2026-04-04
+注：极速精确剪辑需要 ffprobe.exe 也扔到同目录
+新增支持极速精确剪辑等优化剪辑速度的选项、支持m3u8转mp4、延迟执行有些复杂但是执行很快的命令不能用 改的麻烦懒得改了
+<img width="554" height="360" alt="image" src="https://github.com/user-attachments/assets/558a939c-ee7e-49f1-9acd-fe23a58b2760" />
+<img width="554" height="360" alt="image" src="https://github.com/user-attachments/assets/996050b5-00f9-4292-9a08-87fc8cc1d6fc" />
+
+
 ## 前言
 c#编写的一个基于ffmpeg的视频裁剪小工具，比较粗糙，但是适配自己的需求去编写自己习惯的小工具用的比较舒服。比如现在的裁剪工具感觉就苹果自带的拖动预览比较丝滑，裁剪又不重新乱编码，其它的不是这不合理，就是那不好用，用ffmpeg指令是最干净的，就是缺少可视化操作，效率太差。
 ## 展示
